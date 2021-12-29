@@ -1,8 +1,8 @@
 // importComponent
 import { lazy } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import Navigation from 'components/navigation/Navigation';
-import Section from 'components/section/Section';
+import Navigation from '../components/navigation/Navigation';
+import Section from '../components/section/Section';
 
 const HomePage = lazy(() => import('views/HomePage'));
 const MovieDetailsPage = lazy(() =>
