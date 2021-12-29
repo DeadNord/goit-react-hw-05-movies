@@ -1,0 +1,51 @@
+.list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin: -15px;
+}
+
+.item {
+  display: block;
+  height: 440px;
+  max-width: 280px;
+  margin: 15px;
+  cursor: pointer;
+  /* background-color: black */
+  border-radius: 5px;
+
+  z-index: auto;
+}
+
+.img {
+  display: block;
+  height: 398px;
+  width: 280px;
+  border-radius: 5px;
+}
+
+.card {
+  padding-top: 10px;
+}
+
+.title {
+  max-height: 44px;
+
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33;
+  text-transform: uppercase;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  /* color: $primary-title-text-color; */
+}
+
+.link {
+  text-decoration: none;
+  height: 100%;
+}
