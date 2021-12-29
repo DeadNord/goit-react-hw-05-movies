@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import { renderMovieGlobal } from 'AppServise';
-import Gallery from '../components/Gallery/Gallery';
-import { useHistory, useLocation } from 'react-router-dom';
-import Form from 'components/Form/Form';
+import { renderMovieGlobal } from '../AppServise';
+import Gallery from '../components/gallery/Gallery';
+import { useNavigate, useLocation } from 'react-router-dom';
+import Form from '../components/form/Form';
 
 const MoviesPage = () => {
   const [searchName, setSearchName] = useState('');
@@ -11,7 +11,7 @@ const MoviesPage = () => {
   const [status, setStatus] = useState('idle');
   const [page, setPage] = useState(1);
   const location = useLocation();
-  const history = useHistory();
+  const history = useNavigate();
   const sortOrder = new URLSearchParams(location.search).get('searchBy');
 
   useEffect(() => {

@@ -1,5 +1,3 @@
-@import 'style/shared';
-
 .list {
     display: flex;
     flex-wrap: wrap;

@@ -1,14 +1,14 @@
 // importComponent
 import { lazy } from 'react';
-import { Switch, Route } from 'react-router-dom';
-import Navigation from '../components/navigation/Navigation';
-import Section from '../components/section/Section';
+import { Route, Routes } from 'react-router-dom';
+import Navigation from './components/navigation/Navigation';
+import Section from './components/section/Section';
 
-const HomePage = lazy(() => import('views/HomePage'));
+const HomePage = lazy(() => import('./views/HomePage'));
 const MovieDetailsPage = lazy(() =>
-  import('views/MovieDetailsPage/MovieDetailsPage'),
+  import('./views/MovieDetailsPage/MovieDetailsPage'),
 );
-const MoviesPage = lazy(() => import('views/MoviesPage'));
+const MoviesPage = lazy(() => import('./views/MoviesPage'));
 
 function App() {
   return (
@@ -16,7 +16,7 @@ function App() {
       <Section>
         <Navigation />
       </Section>
-      <Switch>
+      <Routes>
         <Route exact path="/">
           <Section>
             <HomePage />
@@ -32,7 +32,7 @@ function App() {
             <MovieDetailsPage />
           </Section>
         </Route>
-      </Switch>
+      </Routes>
     </>
   );
 }
