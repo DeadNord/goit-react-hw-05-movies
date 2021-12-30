@@ -1,6 +1,7 @@
 import { renderParamsCard } from '../../AppServise';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+
 import CastItem from './CastItem';
 import s from './Cast.module.css';
 
@@ -8,6 +9,7 @@ const Cast = () => {
   const [credits, setCredits] = useState(null);
 
   const params = useParams();
+
   useEffect(() => {
     renderParamsCard(params.movieId, 'credits').then(data => setCredits(data));
   }, []);

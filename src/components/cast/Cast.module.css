@@ -1,14 +1,19 @@
 .list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: flex-start;
-    overflow-y: auto;
-    max-height: 447px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: flex-start;
+  overflow-y: auto;
+  max-height: 447px;
 }
 
 .item {
-    width: 200px;
-    margin-bottom: 5px;
-    border-radius: 10px;
+  width: 200px;
+  margin-bottom: 5px;
+  border-radius: 10px;
+  background-color: white;
+}
+
+.title {
+  text-align: center;
 }

@@ -1,28 +1,22 @@
 .list {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  margin: -15px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 10px;
+  row-gap: 20px;
 }
 
 .item {
   display: block;
   height: 440px;
   max-width: 280px;
-  margin: 15px;
   cursor: pointer;
-  /* background-color: black */
-  border-radius: 5px;
-
-  z-index: auto;
+  text-align: center;
 }
 
 .img {
   display: block;
   height: 398px;
   width: 280px;
-  border-radius: 5px;
 }
 
 .card {
@@ -42,10 +36,11 @@
   overflow: hidden;
   text-overflow: ellipsis;
 
-  /* color: $primary-title-text-color; */
+  color: black;
 }
 
 .link {
   text-decoration: none;
   height: 100%;
+  background-color: rgb(194, 194, 194);
 }

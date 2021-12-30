@@ -1,0 +1,111 @@
+import { useState, useEffect } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
+import { renderMovieGlobal } from '../../AppServise';
+
+import Gallery from '../../components/gallery/Gallery';
+import Form from '../../components/form/Form';
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Loader from 'react-loader-spinner';
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
+import InfiniteScroll from 'react-infinite-scroll-component';
+import s from '../MoviesPage/MoviesPage.module.css';
+
+const MoviesPage = () => {
+  const [searchName, setSearchName] = useState('');
+  const [submitName, setSubmitName] = useState(null);
+  const [movies, setMovies] = useState(null);
+  const [status, setStatus] = useState('idle');
+  const [page, setPage] = useState(1);
+  const location = useLocation();
+  const history = useHistory();
+  const sortOrder = new URLSearchParams(location.search).get('searchBy');
+
+  useEffect(() => {
+    if (!submitName) {
+      if (sortOrder) {
+        setSubmitName(sortOrder);
+        setStatus('pending');
+      }
+      return;
+    }
+    renderMovieGlobal(page, submitName)
+      .then(data => {
+        if (data.results.length === 0)
+          throw new Error(
+            toast.error('No results were found for your search!'),
+          );
+        if (status === 'pending') {
+          setMovies(data.results);
+        } else {
+          setMovies([...movies, ...data.results]);
+        }
+        setStatus('resolved');
+      })
+      .catch(error => {
+        return toast.error(error);
+      });
+  }, [page, submitName]);
+
+  const handleNameChange = e => {
+    setSearchName(e.currentTarget.value.toLowerCase());
+  };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    if (searchName.trim() === '') {
+      toast.warn('Input value!');
+      return;
+    }
+    setSubmitName(searchName);
+    setPage(1);
+    setSearchName('');
+    setStatus('pending');
+    history.push({
+      ...location,
+      search: `searchBy=${searchName}`,
+    });
+  };
+
+  return (
+    <>
+      <Form
+        handleSubmit={handleSubmit}
+        searchName={searchName}
+        handleNameChange={handleNameChange}
+      />
+      <ToastContainer />
+      {status === 'idle' && <p className={s.text}>Input value</p>}
+      {status === 'pending' && (
+        <Loader
+          type="Puff"
+          color="#00BFFF"
+          height={100}
+          width={100}
+          timeout={3000}
+        />
+      )}
+      {status === 'resolved' && (
+        <InfiniteScroll
+          dataLength={movies.length}
+          next={() => setPage(page + 1)}
+          hasMore={true}
+          style={{ overflow: 'hidden' }}
+          loader={
+            <Loader
+              type="Puff"
+              color="#00BFFF"
+              height={100}
+              width={100}
+              timeout={3000}
+            />
+          }
+        >
+          <Gallery movies={movies} />
+        </InfiniteScroll>
+      )}
+    </>
+  );
+};
+export default MoviesPage;
