@@ -25,7 +25,7 @@ const MovieDetailsPage = () => {
     renderParamsCard(params.movieId).then(data => setMovies(data));
   }, []);
   const onGoBack = () => {
-    history.push(location?.state?.from ?? '/movies');
+    history.push(location?.state?.from ?? '/');
   };
   return (
     <>
@@ -76,10 +76,22 @@ const MovieDetailsPage = () => {
             </div>
           </div>
           <div className={s.links}>
-            <Link className={s.link} to={`${url}/cast`}>
+            <Link
+              className={s.link}
+              to={{
+                pathname: `${url}/cast`,
+                state: { from: location?.state?.from },
+              }}
+            >
               Cast
             </Link>
-            <Link className={s.link} to={`${url}/reviews`}>
+            <Link
+              className={s.link}
+              to={{
+                pathname: `${url}/reviews`,
+                state: { from: location?.state?.from },
+              }}
+            >
               Reviews
             </Link>
           </div>
